@@ -1,32 +1,26 @@
 var fs = require("fs");
 var productsQty = require('./productsQty');
 /*all items in Nelisa Sales History*/
-exports.linesInFiles = function (fileName) {
-	var productsMap = productsQty.productsSold(fileName);
-	return Object.keys(productsMap);
-}
 
 /*most popular product sold*/
-exports.popularProducts = function (fileName) {
+exports.leastPopularProducts = function (fileName) {
 	// body...
 	var productsMap = productsQty.productsSold(fileName);
 
-	var mostPopularProdct = {};
+	var leastPopularProdct = {};
     
-    var max = 0;
+    var max = 1000;
     for(var prop in productsMap) {
         var value = productsMap[prop];
 
-        if(productsMap[prop] > max) {
+        if(productsMap[prop] < max) {
         max = productsMap[prop];
-        mostPopularProdct = {
+        leastPopularProdct = {
                 prodName: prop,
                     amount: max
             }
        }
     } 
-    //console.log(mostPopularProdct);
-    return mostPopularProdct;
+    console.log(leastPopularProdct);
+    return leastPopularProdct;
 }
-
-
